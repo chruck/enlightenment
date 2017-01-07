@@ -138,3 +138,5 @@ include src/modules/Makefile_sysinfo.mk
 include src/modules/Makefile_wireless.mk
 
 include src/modules/Makefile_time.mk
+
+include src/modules/Makefile_weather.mk

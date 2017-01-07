@@ -457,6 +457,19 @@ AC_ARG_ENABLE([wayland],
 AC_MSG_CHECKING([whether wayland support is enabled])
 AC_MSG_RESULT([${e_cv_want_wayland_only}])
 
+# define the openweathermap api key
+
+AC_ARG_WITH([openweathermap-api-key],
+   [AC_HELP_STRING([--with-openweathermap-api-key=OPENWEATHERMAP_API_KEY], [specify a custom openweathermap api key])],
+   [
+    v=$withval;
+    openweathermap_api_key=$v
+    echo "  Enlightenment openweathermap api key explicitly set to "$openweathermap_api_key;
+   ],
+   [openweathermap_api_key=81947d7198f4efa1cc88080be5cc039a])
+AC_SUBST(openweathermap_api_key)
+
+
 # doxygen program for documentation building
 
 EFL_CHECK_DOXYGEN([build_doc="yes"], [build_doc="no"])
@@ -915,6 +928,7 @@ AC_E_OPTIONAL_MODULE([xwayland], $have_wayland_dep, [CHECK_MODULE_XWAYLAND])
 AC_E_OPTIONAL_MODULE([wireless], true)
 AC_E_OPTIONAL_MODULE([time], true)
 AC_E_OPTIONAL_MODULE([sysinfo], true)
+AC_E_OPTIONAL_MODULE([weather], true)
 
 if test "x${HAVE_WL_X11}" != "xyes" && test "x${have_wayland}" = "xyes" && test "x${HAVE_XWAYLAND}" != "xyes"; then
   AC_DEFINE_UNQUOTED([HAVE_WAYLAND_ONLY],[1],[enable wayland-only version of enlightenment])
@@ -1145,6 +1159,7 @@ src/modules/packagekit/module.desktop
 src/modules/wl_desktop_shell/module.desktop
 src/modules/wireless/module.desktop
 src/modules/time/module.desktop
+src/modules/weather/module.desktop
 src/modules/luncher/module.desktop
 src/modules/sysinfo/module.desktop
 data/xsession/enlightenment.desktop
